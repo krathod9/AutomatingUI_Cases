@@ -1,15 +1,9 @@
 package selenium;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import selenium.pom.BaseTest;
-
-import java.util.HashMap;
-import java.util.Map;
+import selenium.pom.base.BaseTest;
 
 public class MyFirstTestCase extends BaseTest {
 
@@ -25,6 +19,7 @@ public class MyFirstTestCase extends BaseTest {
         driver.findElement(By.xpath("//a[@title='View cart']")).click();
         Assert.assertEquals(driver.findElement(By.cssSelector("td[class='product-name'] a")).getText(),"Blue Shoes");
         driver.findElement(By.xpath("//a[@class='checkout-button button alt wc-forward']")).click();
+
         driver.findElement(By.xpath("//input[@name='billing_first_name']")).sendKeys("fName");
         driver.findElement(By.id("billing_last_name")).sendKeys("lName");
         driver.findElement(By.xpath("//input[@name='billing_address_1']")).sendKeys("My address at San Francisco");

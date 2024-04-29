@@ -1,4 +1,4 @@
-package selenium.pom;
+package selenium.pom.base;
 
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterMethod;
