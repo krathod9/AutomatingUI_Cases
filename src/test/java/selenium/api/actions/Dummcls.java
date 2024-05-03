@@ -6,10 +6,10 @@ public class Dummcls {
         SignUpApi sapi=new SignUpApi();
 
         sapi.register();
-        System.out.println("Register Cookies"+sapi.getCookies());
+        //System.out.println("Register Cookies"+sapi.getCookies());
         CartApi cartApi=new CartApi(sapi.getCookies());
         cartApi.addToCart(1215,2);
-        System.out.println(cartApi.getCookie());
+        //System.out.println(cartApi.getCookie());
 
     }
 }

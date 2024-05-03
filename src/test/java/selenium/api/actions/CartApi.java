@@ -3,7 +3,9 @@ package selenium.api.actions;
 import io.restassured.http.Cookies;
 import io.restassured.http.Header;
 import io.restassured.http.Headers;
+import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
+import org.openqa.selenium.json.Json;
 import selenium.utils.FakerUtils;
 
 import java.util.HashMap;
@@ -47,7 +49,8 @@ public class CartApi {
         if (response.getStatusCode()!=200){
             throw new RuntimeException("Failed to add product"+productID+"to the cart"+response.getStatusCode());
         }
-
+        JsonPath js=response.jsonPath();
+        System.out.println(js.peek());
         this.cookie=response.getDetailedCookies();
         return response;
     }

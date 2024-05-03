@@ -71,6 +71,10 @@ public class SignUpApi {
 //        }
 
         this.cookies=response.getDetailedCookies();
+        //System.out.println(response.getHeaders());
+        //System.out.println(response.getBody().toString());
+        //System.out.println((char[]) response.jsonPath().get("fragments"));
+        System.out.println(response.getStatusCode());
         return response;
     }
 }
