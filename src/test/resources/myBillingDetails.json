@@ -1,0 +1,8 @@
+{
+  "fistName":"testuser",
+  "lastName":"testuserlname",
+  "address":"address test user",
+  "postalCode":"94188",
+  "city": "San Francisco",
+  "email":"testuser@test.com"
+}

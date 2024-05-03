@@ -26,7 +26,7 @@ public class secondTC extends BaseTest {
         CartPage cartPage=storePage.viewItemsFromCart();
         Assert.assertEquals(cartPage.getProductName(),"Blue Shoes");
         CheckoutPage checkoutPage=cartPage.checkoutCart();
-        checkoutPage.userLogin("testdemo","test123");
+        //checkoutPage.userLogin("testdemo","test123");
         checkoutPage.addShippingDetails(details);
         Thread.sleep(8000);
         Assert.assertEquals(checkoutPage.getOrderSuccessText(),"Thank you. Your order has been received.");

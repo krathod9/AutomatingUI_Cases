@@ -2,6 +2,8 @@ package selenium.pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import selenium.objects.BillingAddress;
+import selenium.objects.UserInfo;
 import selenium.pom.base.BasePage;
 
 public class CheckoutPage extends BasePage {
@@ -18,7 +20,9 @@ public class CheckoutPage extends BasePage {
     private final By password = By.id("password");
     private final By loginButton = By.xpath("//button[@name='login']");
     private final By enableLoginButton = By.xpath("//a[@class='showlogin']");
-    public CheckoutPage(WebDriver driver) {
+
+
+        public CheckoutPage(WebDriver driver) {
         super(driver);
     }
 
@@ -63,6 +67,15 @@ public class CheckoutPage extends BasePage {
                 enterBillingEmail(details[5]).placeOrder();
 
     }
+
+    public CheckoutPage enterBillingDetails(BillingAddress billing){
+        return  enterFirstName(billing.getFistName()).
+                enterLastName(billing.getLastName()).
+                enterBillingAddress(billing.getAddress()).
+                enterBillingCity(billing.getCity()).
+                enterBillingEmail(billing.getEmail()).
+                enterBillingPostCode(billing.getPostalCode());
+    }
     public CheckoutPage enterUserName(String userName){
         driver.findElement(userID).sendKeys(userName);
         return this;
@@ -78,15 +91,17 @@ public class CheckoutPage extends BasePage {
         driver.findElement(loginButton).click();
     }
 
-    public void userLogin(String username, String pwd) throws InterruptedException {
+    public CheckoutPage userLogin(UserInfo userInfo) throws InterruptedException {
         enableLoginButton();
         Thread.sleep(2000);
-        enterUserName(username).enterPassword(pwd).clickLoginButton();
+        enterUserName(userInfo.getUserID()).enterPassword(userInfo.getPassword()).clickLoginButton();
+        return this;
     }
 
 
-    public void placeOrder(){
+    public CheckoutPage placeOrder(){
         driver.findElement(placeOrderButton).click();
+        return this;
     }
     public String getOrderSuccessText(){
         return driver.findElement(orderConfirmation).getText();
