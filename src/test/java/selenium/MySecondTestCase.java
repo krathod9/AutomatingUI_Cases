@@ -23,18 +23,22 @@ import java.util.Map;
 public class MySecondTestCase extends BaseTest {
     @Test
     public void guestCheckoutDirectBankTransferwithLogin() throws InterruptedException, IOException {
+        String searchItem="Blue";
         BillingAddress billingAddress1= JacksonUtils.deserializeJson("myBillingDetails.json",BillingAddress.class);
         UserInfo userinfo=JacksonUtils.deserializeJson("userInfo.json",UserInfo.class);
         Product product=new Product(1215);
+
         StorePage storePage=new HomePage(driver).
                 load().
                 clickStoreMenulink().
-                search("Blue"); //Builder Pattern
+                search(searchItem); //Builder Pattern
         Assert.assertEquals(storePage.getTitleText(),"Search results: “Blue”");
+
         storePage.addItemToCart(product.getName());
         Thread.sleep(5000);
         CartPage cartPage=storePage.viewItemsFromCart();
         Assert.assertEquals(cartPage.getProductName(),product.getName());
+
         CheckoutPage checkoutPage=cartPage.checkoutCart().userLogin(userinfo).
                 enterBillingDetails(billingAddress1).
                 placeOrder();
