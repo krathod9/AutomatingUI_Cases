@@ -1,4 +1,4 @@
-package selenium;
+package selenium.tests;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -36,6 +36,7 @@ public class MySecondTestCase extends BaseTest {
 
         storePage.addItemToCart(product.getName());
         Thread.sleep(5000);
+
         CartPage cartPage=storePage.viewItemsFromCart();
         Assert.assertEquals(cartPage.getProductName(),product.getName());
 
