@@ -2,7 +2,12 @@ package selenium.pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import selenium.pom.base.BasePage;
+
+import java.time.Duration;
 
 public class StorePage extends BasePage {
 
@@ -41,6 +46,7 @@ public class StorePage extends BasePage {
     }
 
     public CartPage viewItemsFromCart(){
+        new WebDriverWait(driver, Duration.ofSeconds(5)).until(ExpectedConditions.elementToBeClickable(viewCart));
         driver.findElement(viewCart).click();
         return new CartPage(driver);
     }

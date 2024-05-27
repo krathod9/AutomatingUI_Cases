@@ -2,9 +2,17 @@ package selenium.pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 import selenium.objects.BillingAddress;
 import selenium.objects.UserInfo;
 import selenium.pom.base.BasePage;
+
+import java.time.Duration;
+import java.util.List;
 
 public class CheckoutPage extends BasePage {
     private final By firstName = By.xpath("//input[@name='billing_first_name']");
@@ -20,6 +28,7 @@ public class CheckoutPage extends BasePage {
     private final By password = By.id("password");
     private final By loginButton = By.xpath("//button[@name='login']");
     private final By enableLoginButton = By.xpath("//a[@class='showlogin']");
+    private final By checkoutOverlay= By.cssSelector(".blockUI.blockOverlay");
 
 
         public CheckoutPage(WebDriver driver) {
@@ -27,9 +36,10 @@ public class CheckoutPage extends BasePage {
     }
 
     public CheckoutPage enterFirstName(String fName){
-        driver.findElement(firstName).clear();
-        driver.findElement(firstName).sendKeys(fName);
-        return this;
+            WebElement e=waitForElementToBeVisible(firstName);
+            e.clear();
+            e.sendKeys(fName);
+            return this;
     }
 
     public CheckoutPage enterLastName(String lName){
@@ -100,14 +110,17 @@ public class CheckoutPage extends BasePage {
 
 
     public CheckoutPage placeOrder(){
+        waitForOverlayToDisappear(checkoutOverlay);
         driver.findElement(placeOrderButton).click();
         return this;
     }
     public String getOrderSuccessText(){
+        new WebDriverWait(driver,Duration.ofSeconds(5)).until(ExpectedConditions.presenceOfElementLocated(orderConfirmation));
         return driver.findElement(orderConfirmation).getText();
     }
     public String getOrderID(){
-        return driver.findElement(orderID).getText();
+            new WebDriverWait(driver,Duration.ofSeconds(5)).until(ExpectedConditions.presenceOfElementLocated(orderID));
+            return driver.findElement(orderID).getText();
     }
-
 }
+

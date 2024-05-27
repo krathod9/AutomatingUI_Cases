@@ -1,0 +1,4 @@
+{"Name": "raj",
+  "Course":"MCA",
+  "Subjects": [{"sub1": "maths", "marks":  "90"},{"sub2": "eng","marks": "88"}]
+}

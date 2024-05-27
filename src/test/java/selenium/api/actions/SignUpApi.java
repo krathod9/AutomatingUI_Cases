@@ -9,6 +9,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import selenium.utils.FakerUtils;
 
+import java.lang.reflect.Array;
 import java.util.HashMap;
 
 import static io.restassured.RestAssured.given;

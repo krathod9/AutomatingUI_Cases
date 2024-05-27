@@ -1,5 +1,6 @@
 package selenium.api.actions;
 
+import com.google.gson.JsonObject;
 import io.restassured.http.Cookies;
 import io.restassured.http.Header;
 import io.restassured.http.Headers;
@@ -50,6 +51,7 @@ public class CartApi {
             throw new RuntimeException("Failed to add product"+productID+"to the cart"+response.getStatusCode());
         }
         JsonPath js=response.jsonPath();
+        JsonObject jsonObject=js.getJsonObject("");
         System.out.println(js.peek());
         this.cookie=response.getDetailedCookies();
         return response;

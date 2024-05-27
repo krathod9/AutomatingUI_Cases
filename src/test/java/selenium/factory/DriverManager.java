@@ -5,6 +5,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
 import java.sql.Driver;
+import java.time.Duration;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -17,7 +18,8 @@ public class DriverManager {
         options.setExperimentalOption("prefs", prefs);
         WebDriver driver =new ChromeDriver(options);
         driver.manage().window().maximize();
-       // driver.manage().timeouts().implicitlyWait();
+//        driver.getWindowHandle();
+//        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
         return driver;
     }
 }
