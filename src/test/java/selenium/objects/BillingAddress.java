@@ -1,19 +1,45 @@
 package selenium.objects;
 
 public class BillingAddress {
-    private String fistName, lastName, address, postalCode, city,email;
+    private String fistName;
+    private String lastName;
+    private String address;
+    private String postalCode;
+    private String city;
+    private String email;
+    private String country;
 
-    public BillingAddress(String fistName, String lastName, String address, String postalCode, String city, String email) {
+
+
+    private String state;
+
+    public BillingAddress() {    }
+    public BillingAddress(String country,String state,String fistName, String lastName, String address, String postalCode, String city, String email) {
         this.fistName = fistName;
         this.lastName = lastName;
         this.address = address;
         this.postalCode = postalCode;
         this.city = city;
         this.email = email;
+        this.country=country;
+        this.state=state;
     }
 
-    public BillingAddress() {
 
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
     }
 
     public String getFistName() {

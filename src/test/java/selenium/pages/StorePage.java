@@ -46,7 +46,7 @@ public class StorePage extends BasePage {
     }
 
     public CartPage viewItemsFromCart(){
-        new WebDriverWait(driver, Duration.ofSeconds(5)).until(ExpectedConditions.elementToBeClickable(viewCart));
+        waitShort.until(ExpectedConditions.elementToBeClickable(viewCart));
         driver.findElement(viewCart).click();
         return new CartPage(driver);
     }

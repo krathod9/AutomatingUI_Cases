@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import selenium.objects.BillingAddress;
@@ -29,9 +30,11 @@ public class CheckoutPage extends BasePage {
     private final By loginButton = By.xpath("//button[@name='login']");
     private final By enableLoginButton = By.xpath("//a[@class='showlogin']");
     private final By checkoutOverlay= By.cssSelector(".blockUI.blockOverlay");
+    private final By countryDropDown = By.id("billing_country");
+    private final By stateDropDown = By.id("billing_state");
+    private final By directBankTransferRadioButton=By.id("payment_method_bacs");
 
-
-        public CheckoutPage(WebDriver driver) {
+    public CheckoutPage(WebDriver driver) {
         super(driver);
     }
 
@@ -86,17 +89,19 @@ public class CheckoutPage extends BasePage {
     public CheckoutPage enterBillingDetails(BillingAddress billing){
         return  enterFirstName(billing.getFistName()).
                 enterLastName(billing.getLastName()).
+                selectCountry(billing.getCountry()).
                 enterBillingAddress(billing.getAddress()).
                 enterBillingCity(billing.getCity()).
+                selectState(billing.getState()).
                 enterBillingEmail(billing.getEmail()).
                 enterBillingPostCode(billing.getPostalCode());
     }
     public CheckoutPage enterUserName(String userName){
-        driver.findElement(userID).sendKeys(userName);
+        waitLong.until(ExpectedConditions.visibilityOfElementLocated(userID)).sendKeys(userName);
         return this;
     }
     public CheckoutPage enterPassword(String pwd){
-        driver.findElement(password).sendKeys(pwd);
+        waitLong.until(ExpectedConditions.visibilityOfElementLocated(password)).sendKeys(pwd);
         return this;
     }
     public void enableLoginButton(){
@@ -108,7 +113,6 @@ public class CheckoutPage extends BasePage {
 
     public CheckoutPage userLogin(UserInfo userInfo) throws InterruptedException {
         enableLoginButton();
-        Thread.sleep(2000);
         enterUserName(userInfo.getUserID()).enterPassword(userInfo.getPassword()).clickLoginButton();
         return this;
     }
@@ -116,16 +120,33 @@ public class CheckoutPage extends BasePage {
 
     public CheckoutPage placeOrder(){
         waitForOverlayToDisappear(checkoutOverlay);
-        driver.findElement(placeOrderButton).click();
+        waitShort.until(ExpectedConditions.elementToBeClickable(placeOrderButton)).click();
+        return this;
+    }
+
+    public CheckoutPage selectCountry(String countryName){
+        Select select=new Select(driver.findElement(countryDropDown));
+        select.selectByVisibleText(countryName);
+        return this;
+    }
+
+    public CheckoutPage selectState(String stateName){
+        Select select=new Select(driver.findElement(stateDropDown));
+        select.selectByVisibleText(stateName);
+        return this;
+    }
+    public CheckoutPage selectDirectBankTransfer(){
+        WebElement e=waitShort.until(ExpectedConditions.elementToBeClickable(directBankTransferRadioButton));
+        if(!e.isSelected()){
+            e.click();
+        }
         return this;
     }
     public String getOrderSuccessText(){
-        new WebDriverWait(driver,Duration.ofSeconds(5)).until(ExpectedConditions.presenceOfElementLocated(orderConfirmation));
-        return driver.findElement(orderConfirmation).getText();
+        return waitShort.until(ExpectedConditions.presenceOfElementLocated(orderConfirmation)).getText();
     }
     public String getOrderID(){
-            new WebDriverWait(driver,Duration.ofSeconds(5)).until(ExpectedConditions.presenceOfElementLocated(orderID));
-            return driver.findElement(orderID).getText();
+        return waitShort.until(ExpectedConditions.presenceOfElementLocated(orderID)).getText();
     }
 }
 

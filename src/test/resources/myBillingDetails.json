@@ -1,8 +1,11 @@
 {
   "fistName":"testuser",
   "lastName":"testuserlname",
+  "country": "India",
   "address":"address test user",
-  "postalCode":"94188",
-  "city": "San Francisco",
+  "city": "Pune",
+  "state":"Maharashtra",
+  "postalCode":"411001",
   "email":"testuser@test.com"
+
 }
