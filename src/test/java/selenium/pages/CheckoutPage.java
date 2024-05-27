@@ -43,28 +43,33 @@ public class CheckoutPage extends BasePage {
     }
 
     public CheckoutPage enterLastName(String lName){
-        driver.findElement(lastName).clear();
-        driver.findElement(lastName).sendKeys(lName);
+        WebElement e=waitForElementToBeVisible(lastName);
+        e.clear();
+        e.sendKeys(lName);
         return this;
     }
     public CheckoutPage enterBillingAddress(String adr){
-        driver.findElement(billingAddress).clear();
-        driver.findElement(billingAddress).sendKeys(adr);
+        WebElement e=waitForElementToBeVisible(billingAddress);
+        e.clear();
+        e.sendKeys(adr);
         return this;
     }
     public CheckoutPage enterBillingCity(String city){
-        driver.findElement(billingCity).clear();
-        driver.findElement(billingCity).sendKeys(city);
+        WebElement e=waitForElementToBeVisible(billingCity);
+        e.clear();
+        e.sendKeys(city);
         return this;
     }
     public CheckoutPage enterBillingPostCode(String postCode){
-        driver.findElement(billingPostCode).clear();
-        driver.findElement(billingPostCode).sendKeys(postCode);
+        WebElement e=waitForElementToBeVisible(billingPostCode);
+        e.clear();
+        e.sendKeys(postCode);
         return this;
     }
     public CheckoutPage enterBillingEmail(String email){
-        driver.findElement(billingEmail).clear();
-        driver.findElement(billingEmail).sendKeys(email);
+        WebElement e=waitForElementToBeVisible(billingEmail);
+        e.clear();
+        e.sendKeys(email);
         return this;
     }
 
