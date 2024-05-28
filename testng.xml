@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="TestSuite">
+    <test name="Chrome">
+        <parameter name="browser" value="CHROME"/>
+<!--        <packages>-->
+<!--            <package name="selenium.tests"></package>-->
+<!--        </packages>-->
+ <classes>
+     <class name="selenium.tests.firstTestCase">
+         <methods>
+             <include name="guestCheckoutDirectBankTransfer"></include>
+         </methods>
+     </class>
+ </classes>
+    </test>
+    <test name="Firefox">
+        <parameter name="browser" value="FIREFOX"/>
+        <!--        <packages>-->
+        <!--            <package name="selenium.tests"></package>-->
+        <!--        </packages>-->
+        <classes>
+            <class name="selenium.tests.firstTestCase">
+                <methods>
+                    <include name="guestCheckoutDirectBankTransfer"></include>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite> <!-- Suite -->

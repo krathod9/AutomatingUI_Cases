@@ -120,7 +120,7 @@ public class CheckoutPage extends BasePage {
 
     public CheckoutPage placeOrder(){
         waitForOverlayToDisappear(checkoutOverlay);
-        waitShort.until(ExpectedConditions.elementToBeClickable(placeOrderButton)).click();
+        waitLong.until(ExpectedConditions.elementToBeClickable(placeOrderButton)).click();
         return this;
     }
 
@@ -143,7 +143,7 @@ public class CheckoutPage extends BasePage {
         return this;
     }
     public String getOrderSuccessText(){
-        return waitShort.until(ExpectedConditions.presenceOfElementLocated(orderConfirmation)).getText();
+        return waitLong.until(ExpectedConditions.presenceOfElementLocated(orderConfirmation)).getText();
     }
     public String getOrderID(){
         return waitShort.until(ExpectedConditions.presenceOfElementLocated(orderID)).getText();

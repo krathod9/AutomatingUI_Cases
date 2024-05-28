@@ -4,6 +4,8 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import selenium.constants.DriverType;
 
 import java.sql.Driver;
 import java.time.Duration;
@@ -12,15 +14,26 @@ import java.util.Map;
 
 public class DriverManager {
 
-    public WebDriver initializeDriver(){
+    public WebDriver initializeDriver(String browser){
+        WebDriver driver;
+        String localBrowser;
+        browser=System.getProperty("browser",browser);//2nd param is default and now 2nd will be taken from testNG
         ChromeOptions options = new ChromeOptions();
         Map<String, Object> prefs = new HashMap<>();
         prefs.put("autofill.profile_enabled", false);
         options.setExperimentalOption("prefs", prefs);
-        WebDriverManager.chromedriver().cachePath("Drivers").setup();
-        WebDriver driver =new ChromeDriver(options);
-        driver.manage().window().maximize();
-//        driver.getWindowHandle();
+        switch (DriverType.valueOf(browser)) {
+            case CHROME:
+                WebDriverManager.chromedriver().cachePath("Drivers").setup();
+                driver = new ChromeDriver(options);
+                break;
+            case FIREFOX:
+                WebDriverManager.firefoxdriver().cachePath("FirefoxDriver").setup();
+                driver = new FirefoxDriver();
+                break;
+            default:
+                throw new IllegalStateException("Invalid Browser passed");
+        }
 //        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
         return driver;
     }
