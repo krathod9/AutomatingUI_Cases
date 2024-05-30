@@ -22,8 +22,7 @@ public class firstTestCase extends BaseTest {
     public void guestCheckoutDirectBankTransfer() throws IOException {
         BillingAddress billingAddress1 = JacksonUtils.deserializeJson("myBillingDetails.json", BillingAddress.class);
         Product product = new Product(1215);
-        Actions actions = new Actions(driver);
-        StorePage storePage = new HomePage(driver).
+        StorePage storePage = new HomePage(getDriver()).
                 load().
                 clickStoreMenulink().
                 search("Blue"); //Builder Pattern
@@ -41,14 +40,14 @@ public class firstTestCase extends BaseTest {
         System.out.println(checkoutPage.getOrderID());
     }
 
-//    @Test
+    @Test
     public void guestCheckoutDirectBankTransferwithLogin() throws InterruptedException, IOException {
         String searchItem="Blue";
         BillingAddress billingAddress1= JacksonUtils.deserializeJson("myBillingDetails.json",BillingAddress.class);
         UserInfo userinfo=JacksonUtils.deserializeJson("userInfo.json",UserInfo.class);
         Product product=new Product(1215);
 
-        StorePage storePage=new HomePage(driver).
+        StorePage storePage=new HomePage(getDriver()).
                 load().
                 clickStoreMenulink().
                 search(searchItem); //Builder Pattern

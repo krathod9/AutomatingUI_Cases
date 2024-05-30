@@ -16,8 +16,6 @@ public class DriverManager {
 
     public WebDriver initializeDriver(String browser){
         WebDriver driver;
-        String localBrowser;
-        browser=System.getProperty("browser",browser);//2nd param is default and now 2nd will be taken from testNG
         ChromeOptions options = new ChromeOptions();
         Map<String, Object> prefs = new HashMap<>();
         prefs.put("autofill.profile_enabled", false);

@@ -7,15 +7,23 @@ import org.testng.annotations.Parameters;
 import selenium.factory.DriverManager;
 
 public class BaseTest {
-protected WebDriver driver;
+private ThreadLocal<WebDriver> driver=new ThreadLocal<>();
+private void setDriver(WebDriver driver){
+    this.driver.set(driver);
+}
+protected WebDriver getDriver(){
+    return this.driver.get();
+}
 @Parameters("browser")
 @BeforeMethod
 public void startDriver(String browser){
-    driver=new DriverManager().initializeDriver(browser);
+    browser=System.getProperty("browser",browser);//2nd param is default and now 1st will be taken from testNG
+    setDriver(new DriverManager().initializeDriver(browser));
+    System.out.println("CURRENT THREAD :" +Thread.currentThread().getId());
 }
 @AfterMethod
 public void quitDriver(){
-    driver.quit();
+    getDriver().quit();
 }
 
 }
