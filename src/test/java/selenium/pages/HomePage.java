@@ -3,7 +3,7 @@ package selenium.pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import selenium.pom.base.BasePage;
+import selenium.base.BasePage;
 
 public class HomePage extends BasePage {
     private final By menulink=By.cssSelector("#menu-item-1227 > a");

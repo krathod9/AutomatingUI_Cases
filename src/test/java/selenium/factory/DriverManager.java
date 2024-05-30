@@ -33,6 +33,7 @@ public class DriverManager {
                 throw new IllegalStateException("Invalid Browser passed");
         }
 //        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+        driver.manage().window().maximize();
         return driver;
     }
 }

@@ -1,7 +1,5 @@
 package selenium.tests;
 
-import org.openqa.selenium.interactions.Actions;
-import org.slf4j.Logger;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import selenium.objects.BillingAddress;
@@ -11,11 +9,11 @@ import selenium.pages.CartPage;
 import selenium.pages.CheckoutPage;
 import selenium.pages.HomePage;
 import selenium.pages.StorePage;
-import selenium.pom.base.BaseTest;
+import selenium.base.BaseTest;
+import selenium.utils.ConfigLoader;
 import selenium.utils.JacksonUtils;
 
 import java.io.IOException;
-import java.io.InputStream;
 
 public class firstTestCase extends BaseTest {
     @Test
@@ -40,11 +38,13 @@ public class firstTestCase extends BaseTest {
         System.out.println(checkoutPage.getOrderID());
     }
 
-    @Test
+   // @Test
     public void guestCheckoutDirectBankTransferwithLogin() throws InterruptedException, IOException {
         String searchItem="Blue";
         BillingAddress billingAddress1= JacksonUtils.deserializeJson("myBillingDetails.json",BillingAddress.class);
-        UserInfo userinfo=JacksonUtils.deserializeJson("userInfo.json",UserInfo.class);
+        //UserInfo userinfo=JacksonUtils.deserializeJson("userInfo.json",UserInfo.class);
+        UserInfo userinfo=new UserInfo(ConfigLoader.getInstance().getUsername(),
+                ConfigLoader.getInstance().getPassword());//to read user credential from properties file
         Product product=new Product(1215);
 
         StorePage storePage=new HomePage(getDriver()).

@@ -1,4 +1,4 @@
-package selenium.pom.base;
+package selenium.base;
 
 public class Singleton {
     private static Singleton singleton_ref = null;
