@@ -10,6 +10,7 @@ public class StorePage extends BasePage {
     private final By searchField=By.id("woocommerce-product-search-field-0");
     private final By searchButton=By.xpath("//button[@value='Search']");
     private final By title=By.cssSelector(".woocommerce-products-header__title.page-title");
+
     private final By viewCart=By.xpath("//a[@title='View cart']");
     public StorePage(WebDriver driver) {
         super(driver);
@@ -23,7 +24,10 @@ public class StorePage extends BasePage {
         driver.findElement(searchButton).click();
         return this;
     }
-
+    public StorePage load(){
+        load("/store/");
+        return this;
+    }
     public StorePage search(String str){
         enterTextInSearchField(str).clickSearchButton();
         return this;

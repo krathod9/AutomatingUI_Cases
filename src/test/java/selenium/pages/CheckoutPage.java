@@ -98,6 +98,10 @@ public class CheckoutPage extends BasePage {
         waitLong.until(ExpectedConditions.visibilityOfElementLocated(password)).sendKeys(pwd);
         return this;
     }
+    public CheckoutPage load(){
+        load("/checkout/");
+        return this;
+    }
     public void enableLoginButton(){
         driver.findElement(enableLoginButton).click();
     }

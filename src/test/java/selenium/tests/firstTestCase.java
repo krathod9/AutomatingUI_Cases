@@ -44,7 +44,7 @@ public class firstTestCase extends BaseTest {
         BillingAddress billingAddress1= JacksonUtils.deserializeJson("myBillingDetails.json",BillingAddress.class);
         //UserInfo userinfo=JacksonUtils.deserializeJson("userInfo.json",UserInfo.class);
         UserInfo userinfo=new UserInfo(ConfigLoader.getInstance().getUsername(),
-                ConfigLoader.getInstance().getPassword());//to read user credential from properties file
+                ConfigLoader.getInstance().getPassword(),"");//to read user credential from properties file
         Product product=new Product(1215);
 
         StorePage storePage=new HomePage(getDriver()).

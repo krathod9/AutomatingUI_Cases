@@ -1,13 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="TestSuite" parallel="methods">
+<suite name="TestSuite" parallel="classes" thread-count="4">
     <test name="Chrome">
         <parameter name="browser" value="CHROME"/>
 <!--        <packages>-->
 <!--            <package name="selenium.tests"></package>-->
 <!--        </packages>-->
         <classes>
-             <class name="selenium.tests.firstTestCase">
+<!--            <class name="selenium.tests.SearchItemTest">-->
+<!--            </class>-->
+<!--            <class name="selenium.tests.NavigationTest">-->
+<!--            </class>-->
+<!--            <class name="selenium.tests.AddToCartTest">-->
+<!--            </class>-->
+            <class name="selenium.tests.CheckoutCartTest_unused">
             </class>
         </classes>
     </test>
