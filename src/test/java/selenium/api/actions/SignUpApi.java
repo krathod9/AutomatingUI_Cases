@@ -41,8 +41,7 @@ public class SignUpApi {
                 when().
                     get("/account").
                 then().
-//                    log().
-//                    all().
+//                    log().all().
                     extract().
                     response();
         if(response.getStatusCode()!=200){

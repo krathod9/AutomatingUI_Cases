@@ -27,6 +27,7 @@ public class CheckoutPage extends BasePage {
     private final By countryDropDown = By.id("billing_country");
     private final By stateDropDown = By.id("billing_state");
     private final By directBankTransferRadioButton=By.id("payment_method_bacs");
+    private final By productName=By.xpath("//td[@class='product-name']");
 
     public CheckoutPage(WebDriver driver) {
         super(driver);
@@ -105,8 +106,9 @@ public class CheckoutPage extends BasePage {
     public void enableLoginButton(){
         driver.findElement(enableLoginButton).click();
     }
-    public void clickLoginButton(){
-        driver.findElement(loginButton).click();
+    public CheckoutPage clickLoginButton(){
+        waitShort.until(ExpectedConditions.elementToBeClickable(loginButton)).click();
+        return this;
     }
 
     public CheckoutPage userLogin(UserInfo userInfo) throws InterruptedException {
@@ -144,6 +146,10 @@ public class CheckoutPage extends BasePage {
     }
     public String getOrderID(){
         return waitShort.until(ExpectedConditions.presenceOfElementLocated(orderID)).getText();
+    }
+
+    public String getProductName(){
+        return waitShort.until(ExpectedConditions.presenceOfElementLocated(productName)).getText();
     }
 }
 

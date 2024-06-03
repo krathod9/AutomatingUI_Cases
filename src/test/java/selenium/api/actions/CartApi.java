@@ -14,6 +14,7 @@ import java.util.HashMap;
 import static io.restassured.RestAssured.given;
 
 public class CartApi {
+    Cookies cookie=new Cookies();
 
     public CartApi(Cookies cookie) {
         this.cookie = cookie;
@@ -21,11 +22,11 @@ public class CartApi {
 
     public CartApi(){}
 
-    public Cookies getCookie() {
+    public Cookies getCookies() {
         return cookie;
     }
 
-    Cookies cookie=new Cookies();
+
 
     public Response addToCart(int productID, int quantity){
         Header header = new Header("content-type","application/x-www-form-urlencoded");
@@ -40,6 +41,7 @@ public class CartApi {
                 headers(headers).
                 formParams(formparam).
                 cookies(cookie).
+                log().all().
         when().
                 post("/?wc-ajax=add_to_cart").
         then().
@@ -50,9 +52,7 @@ public class CartApi {
         if (response.getStatusCode()!=200){
             throw new RuntimeException("Failed to add product"+productID+"to the cart"+response.getStatusCode());
         }
-        JsonPath js=response.jsonPath();
-        JsonObject jsonObject=js.getJsonObject("");
-        System.out.println(js.peek());
+
         this.cookie=response.getDetailedCookies();
         return response;
     }

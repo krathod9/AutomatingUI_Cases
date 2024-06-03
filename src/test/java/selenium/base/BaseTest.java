@@ -1,11 +1,16 @@
 package selenium.base;
 
+import io.restassured.http.Cookies;
+import org.openqa.selenium.Cookie;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 import selenium.factory.DriverManager;
+import selenium.utils.CookieUtil;
+
+import java.util.List;
 
 public class BaseTest {
 private ThreadLocal<WebDriver> driver=new ThreadLocal<>();
@@ -27,5 +32,13 @@ public void startDriver(@Optional String browser){//this is mark the param as op
 public void quitDriver(){
     getDriver().quit();
 }
+public void injectCookiesToBrowser(Cookies cookies){
+    List<Cookie> seleniumCookies= new CookieUtil().convertRESTToSeleniumCookies(cookies);
+    for(Cookie cookie:seleniumCookies){
+        getDriver().manage().addCookie(cookie);
+    }
+}
 
 }
+
+

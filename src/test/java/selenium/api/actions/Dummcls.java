@@ -15,14 +15,18 @@ import java.util.Iterator;
 public class Dummcls {
 
     public static void main (String args[]) {
+
         UserInfo userInfo =new UserInfo().
                 setUserID("demo"+ new FakerUtils().generateRandongNumber()).
-                setEmail("demo121@email.com").
+                setEmail("demo001@email.com").
                 setPassword("demopwd122");
 
         SignUpApi sapi=new SignUpApi();
         sapi.register(userInfo);
         System.out.println("Register Cookies"+sapi.getCookies());
+        CartApi cartApi=new CartApi(sapi.getCookies());
+        cartApi.addToCart(1215,1);
+        System.out.println("Cart api cookies"+cartApi.getCookies());
 ////
 ////        sapi.register();
 ////        //System.out.println("Register Cookies"+sapi.getCookies());

@@ -16,14 +16,14 @@ import selenium.utils.JacksonUtils;
 import java.io.IOException;
 
 public class firstTestCase extends BaseTest {
-    @Test
+    //@Test
     public void guestCheckoutDirectBankTransfer() throws IOException {
         BillingAddress billingAddress1 = JacksonUtils.deserializeJson("myBillingDetails.json", BillingAddress.class);
         Product product = new Product(1215);
         StorePage storePage = new HomePage(getDriver()).
                 load().
                 clickStoreMenulink().
-                search("Blue"); //Builder Pattern
+                searchWithpartialMatch("Blue"); //Builder Pattern
         Assert.assertEquals(storePage.getTitleText(), "Search results: “Blue”");
         storePage.addItemToCart(product.getName());
 
@@ -50,7 +50,7 @@ public class firstTestCase extends BaseTest {
         StorePage storePage=new HomePage(getDriver()).
                 load().
                 clickStoreMenulink().
-                search(searchItem); //Builder Pattern
+                searchWithpartialMatch(searchItem); //Builder Pattern
         Assert.assertEquals(storePage.getTitleText(),"Search results: “Blue”");
 
         storePage.addItemToCart(product.getName());

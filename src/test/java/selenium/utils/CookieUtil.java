@@ -4,20 +4,19 @@ import io.restassured.http.Cookies;
 import org.openqa.selenium.Cookie;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class CookieUtil {
-
-//    public List<Cookie> covertRestToSelenium(Cookies cookies){
-//        List<io.restassured.http.Cookie> restAssuredcookie=new ArrayList();
-//        restAssuredcookie=cookies.asList();
-//        List<Cookie> seleniumCookies= new ArrayList<>();
-//        for (io.restassured.http.Cookie cookie : restAssuredcookie){
-////            seleniumCookies.add(new Cookie(cookie.getName(),cookie.getValue(),
-////                    cookie.getValue(),cookie.getDomain(),cookie.getPath(),
-////                    cookie.getExpiryDate(),cookie.isSecured()
-////                    ,cookie.isHttpOnly(),cookie.getSameSite()));
-//            return
-//        }
-//    }
+    public List<Cookie> convertRESTToSeleniumCookies(Cookies cookies){
+        List<io.restassured.http.Cookie> restCookies=new ArrayList<>();
+        restCookies=cookies.asList();
+        List<Cookie> seleniumCookies=new ArrayList<>();
+        for(io.restassured.http.Cookie cookie: restCookies){
+            seleniumCookies.add(new Cookie(cookie.getName(),cookie.getValue(),cookie.getDomain()
+            ,cookie.getPath(),cookie.getExpiryDate(),cookie.isSecured(),cookie.isHttpOnly(),
+                    cookie.getSameSite()));
+        }
+        return seleniumCookies;
+    }
 }

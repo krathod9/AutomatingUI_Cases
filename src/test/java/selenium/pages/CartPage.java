@@ -1,5 +1,6 @@
 package selenium.pages;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
@@ -8,6 +9,7 @@ import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import selenium.base.BasePage;
+import selenium.objects.Product;
 
 public class CartPage extends BasePage {
     @FindBy(css="td[class='product-name'] a") WebElement productName;//PageFactory Implementation
@@ -27,5 +29,10 @@ public class CartPage extends BasePage {
         waitShort.until(ExpectedConditions.elementToBeClickable(checkoutButton)).click();
         return new CheckoutPage(driver);
 
+    }
+
+    public String getProductNameFromCart(Product product){
+        return waitShort.until(ExpectedConditions.visibilityOfElementLocated
+                (By.xpath("//a[text()='"+product.getName()+"']"))).getText();
     }
 }
