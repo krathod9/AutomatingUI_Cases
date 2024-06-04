@@ -7,13 +7,15 @@ import io.restassured.http.Headers;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import org.openqa.selenium.json.Json;
+import selenium.api.APIRequest;
+import selenium.constants.EndPoints;
 import selenium.utils.FakerUtils;
 
 import java.util.HashMap;
 
 import static io.restassured.RestAssured.given;
 
-public class CartApi {
+public class CartApi extends APIRequest {
     Cookies cookie=new Cookies();
 
     public CartApi(Cookies cookie) {
@@ -36,18 +38,8 @@ public class CartApi {
         formparam.put("product_id",productID);
         formparam.put("quantity",quantity);
         if(cookie==null){cookie=new Cookies();}
-        Response response = given().
-                baseUri("https://askomdch.com/").
-                headers(headers).
-                formParams(formparam).
-                cookies(cookie).
-                log().all().
-        when().
-                post("/?wc-ajax=add_to_cart").
-        then().
-                log().all().
-                extract().
-                response();
+
+        Response response = post(EndPoints.ADD_TO_CART.url, cookie,headers,formparam);
 
         if (response.getStatusCode()!=200){
             throw new RuntimeException("Failed to add product"+productID+"to the cart"+response.getStatusCode());

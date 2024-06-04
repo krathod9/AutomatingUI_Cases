@@ -1,24 +1,15 @@
 package selenium.api.actions;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 import selenium.objects.UserInfo;
 import selenium.utils.FakerUtils;
-
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.util.Iterator;
 
 public class Dummcls {
 
     public static void main (String args[]) {
 
         UserInfo userInfo =new UserInfo().
-                setUserID("demo"+ new FakerUtils().generateRandongNumber()).
-                setEmail("demo001@email.com").
+                setUserID("demo"+ new FakerUtils().generateRandomNumber()).
+                setEmail("demook1@email.com").
                 setPassword("demopwd122");
 
         SignUpApi sapi=new SignUpApi();

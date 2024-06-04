@@ -7,6 +7,8 @@ import io.restassured.response.Response;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
+import selenium.api.APIRequest;
+import selenium.constants.EndPoints;
 import selenium.objects.UserInfo;
 import selenium.utils.ConfigLoader;
 import selenium.utils.FakerUtils;
@@ -16,7 +18,7 @@ import java.util.HashMap;
 import static io.restassured.RestAssured.get;
 import static io.restassured.RestAssured.given;
 
-public class SignUpApi {
+public class SignUpApi extends APIRequest {
     private Cookies cookies;
 
     public Cookies getCookies() {
@@ -34,16 +36,7 @@ public class SignUpApi {
     }
     public Response getAccount(){
         Cookies cookies=new Cookies();
-        Response response=
-                given().
-                    baseUri(ConfigLoader.getInstance().getBaseURL())
-                    .cookies(cookies).//log().all().
-                when().
-                    get("/account").
-                then().
-//                    log().all().
-                    extract().
-                    response();
+        Response response= get(EndPoints.ACCOUNT.url,cookies);
         if(response.getStatusCode()!=200){
             throw new RuntimeException("Failed to fetch the account. HTTP status code "+response.getStatusCode());
         }
@@ -53,25 +46,13 @@ public class SignUpApi {
         Cookies cookies=new Cookies();
         Header header = new Header("content-type","application/x-www-form-urlencoded");
         Headers headers = new Headers(header);
-        HashMap<String,String> formparam= new HashMap<>();
+        HashMap<String,Object> formparam= new HashMap<>();
         formparam.put("username",userInfo.getUserID());
         formparam.put("password",userInfo.getPassword());
         formparam.put("email",userInfo.getEmail());
         formparam.put("woocommerce-register-nonce",fetchRegisterNonceValueUsingJsoup());
         formparam.put("register","Register");
-        Response response=
-                given().
-                        baseUri(ConfigLoader.getInstance().getBaseURL()).
-                        headers(headers).
-                        formParams(formparam).
-                        cookies(cookies).
-                        log().all().
-                when().
-                        post("/account").
-                then().
-                        log().all().
-                        extract().
-                        response();
+        Response response= post(EndPoints.ACCOUNT.url, cookies,headers,formparam);
         if(response.getStatusCode()!=302){
             throw new RuntimeException("Failed to register the account. HTTP status code "+response.getStatusCode());
         }

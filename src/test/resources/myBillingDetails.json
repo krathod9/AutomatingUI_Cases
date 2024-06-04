@@ -1,5 +1,6 @@
-{
-  "fistName":"testuser",
+[
+  {
+  "fistName":"test",
   "lastName":"testuserlname",
   "country": "India",
   "address":"address test user",
@@ -7,5 +8,15 @@
   "state":"Maharashtra",
   "postalCode":"411001",
   "email":"testuser@test.com"
-
-}
+  },
+  {
+    "fistName":"kr1",
+    "lastName":"rt2",
+    "country": "United States (US)",
+    "address":"address test user",
+    "city": "San Francisco",
+    "state":"California",
+    "postalCode":"91488",
+    "email":"krrd@test.com"
+  }
+  ]

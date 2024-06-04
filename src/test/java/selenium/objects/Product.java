@@ -7,6 +7,7 @@ import java.io.IOException;
 public class Product {
     private int id;
     private String name;
+    private boolean featured;
 public Product(){}
     public Product(int id) throws IOException {
     Product[] products= JacksonUtils.deserializeJson("products.json", Product[].class);
@@ -17,6 +18,13 @@ public Product(){}
             }
         }
 
+    }
+    public boolean isFeatured() {
+        return featured;
+    }
+
+    public void setFeatured(boolean featured) {
+        this.featured = featured;
     }
     public int getId() {
         return id;

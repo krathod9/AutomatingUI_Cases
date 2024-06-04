@@ -27,6 +27,7 @@ public class CheckoutPage extends BasePage {
     private final By countryDropDown = By.id("billing_country");
     private final By stateDropDown = By.id("billing_state");
     private final By directBankTransferRadioButton=By.id("payment_method_bacs");
+    private final By cashOnDelivery=By.id("payment_method_cod");
     private final By productName=By.xpath("//td[@class='product-name']");
 
     public CheckoutPage(WebDriver driver) {
@@ -136,6 +137,13 @@ public class CheckoutPage extends BasePage {
     }
     public CheckoutPage selectDirectBankTransfer(){
         WebElement e=waitShort.until(ExpectedConditions.elementToBeClickable(directBankTransferRadioButton));
+        if(!e.isSelected()){
+            e.click();
+        }
+        return this;
+    }
+    public CheckoutPage selectCashOnDelivery(){
+        WebElement e=waitShort.until(ExpectedConditions.elementToBeClickable(cashOnDelivery));
         if(!e.isSelected()){
             e.click();
         }

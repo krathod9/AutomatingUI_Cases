@@ -2,11 +2,13 @@ package selenium.pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import selenium.base.BasePage;
 import selenium.objects.Product;
 
 import java.io.IOException;
+import java.util.List;
 
 public class StorePage extends BasePage {
 
@@ -15,6 +17,7 @@ public class StorePage extends BasePage {
     private final By title=By.cssSelector(".woocommerce-products-header__title.page-title");
     private final By viewCart=By.xpath("//a[@title='View cart']");
     private final By infoTextForSeach = By.cssSelector(".woocommerce-info.woocommerce-no-products-found");
+    private final By storePage2=By.xpath("//a[@class='page-numbers' and text()='2']");
     public StorePage(WebDriver driver) {
         super(driver);
     }
@@ -35,6 +38,21 @@ public class StorePage extends BasePage {
         enterTextInSearchField(str).clickSearchButton();
         return this;
     }
+
+    public StorePage addProductsFromStorePage(String str){
+        if(!isProductVisible(str)){
+            waitShort.until(ExpectedConditions.elementToBeClickable(storePage2)).click();
+        }
+        waitShort.until(ExpectedConditions.elementToBeClickable
+                (By.xpath("//a[@aria-label='Add “"+str+"” to your cart']"))).click();
+        return this;
+    }
+    public boolean isProductVisible(String str){
+        List<WebElement> webElements =driver.findElements(By.xpath
+                ("//a[@aria-label='Add “"+str+"” to your cart']"));
+        return webElements.size()!=0?true:false;
+    }
+
     public String getTitleText(){
         return driver.findElement(title).getText();
     }

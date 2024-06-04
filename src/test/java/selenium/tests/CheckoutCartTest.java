@@ -1,10 +1,12 @@
 package selenium.tests;
 
 import org.testng.Assert;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import selenium.api.actions.CartApi;
 import selenium.api.actions.SignUpApi;
 import selenium.base.BaseTest;
+import selenium.dataproviders.DataProviders;
 import selenium.objects.BillingAddress;
 import selenium.objects.Product;
 import selenium.objects.UserInfo;
@@ -15,9 +17,8 @@ import selenium.utils.JacksonUtils;
 import java.io.IOException;
 
 public class CheckoutCartTest extends BaseTest {
-    @Test
-    public void guestCheckoutwithDirectBanktransfer() throws IOException {
-        BillingAddress billingAddress1 = JacksonUtils.deserializeJson("myBillingDetails.json", BillingAddress.class);
+    @Test(dataProvider = "getBillingDetails", dataProviderClass = DataProviders.class)
+    public void guestCheckoutwithDirectBanktransfer(BillingAddress billingAddress) throws IOException {
         CheckoutPage checkoutPage = new CheckoutPage(getDriver()).load();
 
         CartApi cartApi=new CartApi();
@@ -26,7 +27,7 @@ public class CheckoutCartTest extends BaseTest {
 
         checkoutPage
                 .load()
-                .enterBillingDetails(billingAddress1)
+                .enterBillingDetails(billingAddress)
                 .selectDirectBankTransfer()
                 .placeOrder();
 
@@ -35,10 +36,9 @@ public class CheckoutCartTest extends BaseTest {
 
     }
 
-    @Test
-    public void loginAndCheckoutwithDirectBanktransfer() throws IOException, InterruptedException {
-        BillingAddress billingAddress1 = JacksonUtils.deserializeJson("myBillingDetails.json", BillingAddress.class);
-        String username="demouser"+new FakerUtils().generateRandongNumber();
+    @Test(dataProvider = "getBillingDetails", dataProviderClass = DataProviders.class)
+    public void loginAndCheckoutwithDirectBanktransfer(BillingAddress billingAddress) throws IOException, InterruptedException {
+        String username="demouser"+new FakerUtils().generateRandomNumber();
         UserInfo userInfo =new UserInfo().
                 setUserID(username).
                 setEmail(username+"@email.com").
@@ -55,7 +55,7 @@ public class CheckoutCartTest extends BaseTest {
         checkoutPage.load();
         Thread.sleep(5000);
 
-                checkoutPage.enterBillingDetails(billingAddress1)
+                checkoutPage.enterBillingDetails(billingAddress)
                 .selectDirectBankTransfer()
                 .placeOrder();
 

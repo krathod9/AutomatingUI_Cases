@@ -27,9 +27,12 @@ public class HomePage extends BasePage {
         return new ProductPage(driver);
     }
 
-    public HomePage addFeaturedProductToCart(Integer id) throws IOException {
-        waitShort.until(ExpectedConditions.elementToBeClickable(By.xpath("//a[@aria-label=\"Add “"+new Product(id).getName()+
-                "” to your cart\"]"))).click();
+    private By getItemToAddToCart(String item){
+        return By.xpath("//a[@aria-label='Add “"+item+"” to your cart']");//Handling dynamic UI elements
+    }
+    public HomePage addItemToCart(String item){
+        By addToCart=getItemToAddToCart(item);
+        driver.findElement(addToCart).click();
         return this;
     }
 
