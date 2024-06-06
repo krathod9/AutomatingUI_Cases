@@ -107,6 +107,11 @@ public class CheckoutPage extends BasePage {
     public void enableLoginButton(){
         driver.findElement(enableLoginButton).click();
     }
+
+    private CheckoutPage isLoginBtnDissapeared(){
+        waitLong.until(ExpectedConditions.invisibilityOfElementLocated(loginButton));
+        return this;
+    }
     public CheckoutPage clickLoginButton(){
         waitShort.until(ExpectedConditions.elementToBeClickable(loginButton)).click();
         return this;
@@ -114,7 +119,8 @@ public class CheckoutPage extends BasePage {
 
     public CheckoutPage userLogin(UserInfo userInfo) throws InterruptedException {
         enableLoginButton();
-        enterUserName(userInfo.getUserID()).enterPassword(userInfo.getPassword()).clickLoginButton();
+        enterUserName(userInfo.getUserID()).enterPassword(userInfo.getPassword()).clickLoginButton()
+                .isLoginBtnDissapeared();
         return this;
     }
 

@@ -19,7 +19,7 @@ public class SearchItemTest extends BaseTest {
                 searchWithpartialMatch(searchItem);
         WebDriverWait webDriverWait=new WebDriverWait(getDriver(), Duration.ofSeconds(10));
         webDriverWait.until(ExpectedConditions.urlContains(searchItem+"&post_type=product"));
-        Assert.assertEquals(storePage.getTitleText(), "Search results: “"+searchItem+"”");
+        Assert.assertEquals(storePage.getTitleText(), "sssSearch results: “"+searchItem+"”");
     }
 
     @Test

@@ -16,8 +16,8 @@ public class BasePage {
     protected WebDriverWait waitShort;
     public BasePage(WebDriver driver){
         this.driver=driver;
-        waitLong=new WebDriverWait(driver,Duration.ofSeconds(15));
-        waitShort=new WebDriverWait(driver,Duration.ofSeconds(5));
+        waitLong=new WebDriverWait(driver,Duration.ofSeconds(30));
+        waitShort=new WebDriverWait(driver,Duration.ofSeconds(10));
     }
     public void load(String endPoint){
         driver.get(ConfigLoader.getInstance().getBaseURL()+endPoint);//common method to load URL Endpoint - for specific page navigation

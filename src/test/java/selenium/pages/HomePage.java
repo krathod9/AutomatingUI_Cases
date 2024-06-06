@@ -5,46 +5,36 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import selenium.base.BasePage;
 import selenium.objects.Product;
+import selenium.pages.components.Headers;
+import selenium.pages.components.ProductThumbnail;
 
 import java.io.IOException;
 
 public class HomePage extends BasePage {
-    private final By menulink=By.cssSelector("#menu-item-1227 > a");
-    private final By viewCart=By.xpath("//a[@title='View cart']");
+    private ProductThumbnail productThumbnail;
+    private Headers headers;
+
     public HomePage(WebDriver driver) {
         super(driver);
+        productThumbnail=new ProductThumbnail(driver);
+        headers=new Headers(driver);
+    }
+    public ProductThumbnail getProductThumbnail() {
+        return productThumbnail;
+    }
+
+    public Headers getHeaders() {
+        return headers;
     }
     public HomePage load(){ //calling common method to load the URL
         load("/");
         return this;
-    }
-    public StorePage clickStoreMenulink(){
-        waitShort.until(ExpectedConditions.elementToBeClickable(menulink)).click();
-        return new StorePage(driver);
     }
     public ProductPage navigateToProductPage(Integer id) throws IOException {
         waitShort.until(ExpectedConditions.elementToBeClickable(By.xpath("//h2[text()='"+new Product(id).getName() +"']"))).click();
         return new ProductPage(driver);
     }
 
-    private By getItemToAddToCart(String item){
-        return By.xpath("//a[@aria-label='Add “"+item+"” to your cart']");//Handling dynamic UI elements
-    }
-    public HomePage addItemToCart(String item){
-        By addToCart=getItemToAddToCart(item);
-        driver.findElement(addToCart).click();
-        return this;
-    }
 
-    public CartPage viewItemsFromCart(){
-        waitShort.until(ExpectedConditions.elementToBeClickable(viewCart)).click();
-        return new CartPage(driver);
-    }
-
-    public ProductPage loadProductPage(Product product){
-        String finalProduct=product.getName().toLowerCase().replaceAll(" ","-");
-        load("/"+finalProduct+"/");
-        return new ProductPage(driver);
-    }
 
 }

@@ -29,5 +29,10 @@ public class ProductPage extends BasePage {
     public String getAlertText(){
         return waitShort.until(ExpectedConditions.visibilityOfElementLocated(alertText)).getText();
     }
+    public ProductPage loadProductPage(Product product){
+        String finalProduct=product.getName().toLowerCase().replaceAll(" ","-");
+        load("/"+finalProduct+"/");
+        return new ProductPage(driver);
+    }
 
 }

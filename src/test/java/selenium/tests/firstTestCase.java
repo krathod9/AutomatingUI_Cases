@@ -20,14 +20,17 @@ public class firstTestCase extends BaseTest {
     public void guestCheckoutDirectBankTransfer() throws IOException {
         BillingAddress billingAddress1 = JacksonUtils.deserializeJson("myBillingDetails.json", BillingAddress.class);
         Product product = new Product(1215);
-        StorePage storePage = new HomePage(getDriver()).
-                load().
-                clickStoreMenulink().
+        StorePage storePage = new HomePage(getDriver()).load().
+                getHeaders().clickStoreMenulink().
                 searchWithpartialMatch("Blue"); //Builder Pattern
-        Assert.assertEquals(storePage.getTitleText(), "Search results: “Blue”");
-        storePage.addItemToCart(product.getName());
 
-        CartPage cartPage = storePage.viewItemsFromCart();
+        Assert.assertEquals(storePage.getTitleText(), "Search results: “Blue”");
+        storePage.
+                getProductThumbnail().addItemToCart(product.getName());
+
+        CartPage cartPage = storePage.
+                getProductThumbnail().viewItemsFromCart();
+
         Assert.assertEquals(cartPage.getProductName(), product.getName());
         CheckoutPage checkoutPage = cartPage.checkoutCart().
                 enterBillingDetails(billingAddress1).
@@ -48,14 +51,16 @@ public class firstTestCase extends BaseTest {
         Product product=new Product(1215);
 
         StorePage storePage=new HomePage(getDriver()).
-                load().
+                load().getHeaders().//composition
                 clickStoreMenulink().
                 searchWithpartialMatch(searchItem); //Builder Pattern
         Assert.assertEquals(storePage.getTitleText(),"Search results: “Blue”");
 
-        storePage.addItemToCart(product.getName());
+        storePage.
+                getProductThumbnail().addItemToCart(product.getName());//composition
 
-        CartPage cartPage=storePage.viewItemsFromCart();
+        CartPage cartPage=storePage.
+                getProductThumbnail().viewItemsFromCart();//composition
         Assert.assertEquals(cartPage.getProductName(),product.getName());
 
         CheckoutPage checkoutPage=cartPage.checkoutCart().userLogin(userinfo).

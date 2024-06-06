@@ -17,7 +17,7 @@ public class NavigationTest extends BaseTest {
     @Test
     public void navigateFromHomeToStorePage(){
         StorePage storePage = new HomePage(getDriver()).
-                load().
+                load().getHeaders().//composition
                 clickStoreMenulink();
         WebDriverWait wait= new WebDriverWait(getDriver(), Duration.ofSeconds(10));
         wait.until(ExpectedConditions.urlContains("store"));
@@ -37,8 +37,7 @@ public class NavigationTest extends BaseTest {
     @Test
     public void navigateFromHomePageToProductPage() throws IOException {
         Product product = new Product(1215);
-        ProductPage productPage= new HomePage(getDriver())
-                .load()
+        ProductPage productPage= new ProductPage(getDriver())
                 .loadProductPage(product);
 
         Assert.assertEquals(productPage.getProductTitle(),product.getName());

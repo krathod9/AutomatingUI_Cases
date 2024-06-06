@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="TestSuite" parallel="tests" thread-count="2">
-    <test name="Chrome" parallel="methods" thread-count="6">
+<suite name="TestSuite" parallel="tests">
+    <test name="Chrome" parallel="methods" thread-count="5">
         <parameter name="browser" value="CHROME"/>
         <packages>
             <package name="selenium.tests"></package>
         </packages>
 <!--        <classes>-->
-<!--            <class name="selenium.tests.CheckoutCartTest"></class>-->
+<!--            <class name="selenium.tests.AddToCartTest"></class>-->
 <!--&lt;!&ndash;            <class name="selenium.tests.SearchItemTest">&ndash;&gt;-->
 <!--&lt;!&ndash;            </class>&ndash;&gt;-->
 <!--&lt;!&ndash;            <class name="selenium.tests.NavigationTest">&ndash;&gt;-->
 <!--&lt;!&ndash;            </class>&ndash;&gt;-->
 <!--&lt;!&ndash;            <class name="selenium.tests.AddToCartTest">&ndash;&gt;-->
 <!--&lt;!&ndash;            </class>&ndash;&gt;-->
-<!--            <class name="selenium.tests.CheckoutCartTest">-->
-<!--            </class>-->
+<!--&lt;!&ndash;            <class name="selenium.tests.CheckoutCartTest">&ndash;&gt;-->
+<!--&lt;!&ndash;            </class>&ndash;&gt;-->
 <!--        </classes>-->
     </test>
 </suite> <!-- Suite -->
